@@ -1,0 +1,41 @@
+body{
+  font-family: 'Roboto', sans-serif;
+  color:#323232;
+  font-size:14px;
+}
+
+a{
+  color:#323232;
+  &:hover{
+    text-decoration: none;
+    color:#ff3800;
+  }
+}
+
+h1,h2,h3,h4,h5{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  color:#323232;
+}
+
+h1, h2{
+  font-size:2rem;
+}
+
+
+
+.breadcrumb{
+  background-color:transparent;
+
+  .breadcrumb-title{
+    font-size:0.75rem;
+    margin-right:.25rem;
+  }
+
+  .breadcrumb-item{
+    font-size:0.75rem;
+    &.active{
+
+    }
+  }
+}

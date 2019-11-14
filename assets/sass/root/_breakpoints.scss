@@ -1,0 +1,23 @@
+@include media-breakpoint-down(sm) {
+    #header{
+        .social-media{
+            display:none !important;
+        }
+    }
+    .plus{
+        display:none !important;
+    }
+    .banner-sind{
+        margin-bottom:3rem !important;
+    }
+    .search{
+        display:none !important;
+    }
+    #footer{
+        text-align:center !important;
+        .footer-right{
+            text-align: center !important;
+        }
+    }
+}
+

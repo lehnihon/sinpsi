@@ -1,0 +1,17 @@
+/*
+Theme Name: Simpsi
+Author: Leandro Kenji Ishikawa
+Version: 1.0.0
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "../bootstrap/bootstrap";
+@import "variables";
+@import "mixins";
+@import "base";
+@import "hamburguer_menu";
+@import "buttons";
+@import "breakpoints";
+@import "header";
+@import "pages";
+@import "footer";

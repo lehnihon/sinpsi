@@ -1,0 +1,244 @@
+#header{
+  background-color:#FFF;
+  .nav-container{
+    border:1px solid #e2e2e3;
+    .navbar-brand{
+      display:inline-block;
+    }
+    .social-media{
+      width:125px;
+      a{
+        font-size:1.25rem;
+        margin-right:.5rem;
+      }
+    }
+    .main-nav{
+      .active{
+        a{
+          color:#ff3800;
+          font-weight:bold;
+        }
+      }
+      a{
+        color:#323232;
+        padding-left:.75rem;
+        padding-right:.75rem;
+        border-right:1px solid #e2e2e3;
+        &:hover{
+          text-decoration: none;
+          color:#ff3800;
+        }
+      }
+    }
+    .search{
+      width:125px;
+      form{
+        margin-left:auto;
+        .search-input{
+          display:none;
+        }
+        .search-btn{
+          border:0;
+          background-color:transparent;
+          font-size:1.125rem;
+        }
+        .search-btn:hover{
+          cursor:pointer;
+          i{
+            color:#ff3800;
+          }
+        }
+      }
+    }
+  }
+}
+#banner{
+  max-width: 1300px;
+  margin:0 auto;
+  .banner-sind{
+    background-image: url("assets/img/sind.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color:#fc7800;
+    color:#FFF;
+    max-height: 300px;
+    .banner-box{
+      padding:3.75rem 0;
+      text-align: center;
+      img{
+        height: 50px;
+      }
+      h2{
+        color:#FFF;
+        font-size:1.25rem;
+        text-transform: uppercase;
+        margin-top:2rem;
+      }
+      h4{
+        font-weight: normal;
+        color:#FFF;
+        font-size:.875rem;
+      }
+    }
+    .btn-sind{
+      border:1px solid #009045;
+      background-color:#009045;
+      display: block;
+      padding:.75rem;
+      text-align: center;
+      color:#FFF;
+      &:hover{
+        background-color:#FFF;
+        color:#009045;
+      }
+    }
+  }
+  .banner-post{
+    position: relative;
+
+    .post-date{
+      background-color:#FFF;
+      padding:0rem .75rem;
+      display: inline-block;
+      text-align: center;
+      z-index:3;
+      position:relative;
+      span{
+        strong{
+          font-size:1.125rem;
+        }
+      }
+    }
+
+    .post-cat{
+      background-color:#fe8800;
+      color:#FFF;
+      width:120px;
+      text-align:center;
+      font-size:.875rem;
+      margin:3rem auto;
+      z-index:3;
+      position:relative;
+    }
+
+    .main-title{
+      text-align:center;
+      text-transform: uppercase;
+      z-index:3;
+      color:#FFF;
+      position:relative;
+      font-size:1.25rem;
+    }
+
+    .options{
+      z-index:3;
+      position:relative;
+      text-align:center;
+      .comment{
+        position: relative;
+        .comment-qtd{
+          position: absolute;
+          background-color:#fe8800;
+          border-radius: 50%;
+          font-size:.5rem;
+          top:-5px;
+          right:-5px;
+          color:#FFF;
+          width:12px;
+        }
+      }
+      .op{
+        margin:0 .25rem;
+        display:inline-block;
+        i{
+          color:#FFF;
+        }
+        &:hover{
+          color:#ff3800;
+        }
+      }
+    }
+
+    .owl-noticias{
+      article{
+        height:321px;
+        padding:1rem;
+        background-repeat: no-repeat;
+        background-size:cover;
+        &:after{
+          content: '\A';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          opacity: 1;
+          background: linear-gradient(transparent 50%,#000000);
+          z-index: 2;
+        }
+      }
+    }
+    
+    .owl-noticias-e{
+      position: absolute;
+      z-index:100;
+      top:40%;
+      left:10px;
+      i{
+        font-size:2rem;
+      }
+    }
+    .owl-noticias-d{
+      position: absolute;
+      z-index:100;
+      top:40%;
+      right:10px;
+      i{
+        font-size:2rem;
+      }
+    }
+
+    h2{
+      font-size:1.25rem;
+      color:#FFF;
+    }
+  }
+  .banner-parc{
+    background-image: url("assets/img/parc.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color:#ff3800;
+    color:#FFF;
+    max-height: 300px;
+    .banner-box{
+      padding:3.75rem 0;
+      text-align: center;
+      img{
+        height: 50px;
+      }
+      h2{
+        color:#FFF;
+        font-size:1.25rem;
+        text-transform: uppercase;
+        margin-top:2rem;
+      }
+      h4{
+        font-weight: normal;
+        color:#FFF;
+        font-size:.875rem;
+      }
+    }
+    .btn-sind{
+      border:1px solid #ff3800;
+      background-color:#ff3800;
+      display: block;
+      padding:.75rem;
+      text-align: center;
+      color:#FFF;
+      &:hover{
+        background-color:#FFF;
+        color:#ff3800;
+      }
+    }
+  }
+}
