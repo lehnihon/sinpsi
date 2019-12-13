@@ -1,11 +1,10 @@
 <?php
-get_header('page'); ?>
-<div id="conteudo">
-  <div id="blog-single">
-    <div class="bx">
-      <div class="container">
-        <div class="row ">
-          <div class="col-md-12">
+get_header(); ?>
+<div id="content">
+  <?php get_template_part( 'breadcrumb' ); ?>
+  <div class="container">
+      <div class="row">
+        <div class="col-12 pb-5">
           <?php
           // Start the loop.
           while ( have_posts() ) : the_post();
@@ -14,10 +13,11 @@ get_header('page'); ?>
             // End of the loop.
           endwhile;
           ?>
-          </div>
         </div>
       </div>
-    </div>
   </div>
 
-<?php get_footer('page'); ?>
+  <?php get_template_part( 'newsletter' ); ?>
+
+</div>
+<?php get_footer(); ?>

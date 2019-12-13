@@ -188,6 +188,33 @@
 }
 
 #content{
+    #inscrevase{
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-image: url("assets/img/assine-background.jpg");
+        padding:6rem 0;
+
+        h5{
+            font-size:.875rem;
+            font-weight: normal;
+            margin-bottom:1rem;
+        }
+        h2{
+            font-weight: normal;
+            font-size:2rem;
+            margin-bottom:1.5rem;
+        }
+        input{
+            background:transparent;
+        }
+        .btn-news{
+            background-color:#ff8d00;
+            color:#FFF;
+            font-weight: bold;
+        }
+    }
+
     #fc-topo{
         padding-top:5rem;
         padding-bottom:2.5rem;

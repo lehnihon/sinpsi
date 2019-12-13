@@ -20,7 +20,9 @@ get_header(); ?>
             ));
           endif;
           ?>
-          <h1><?php the_title(); ?></h1>
+          <h1><?php 
+          remove_filter( 'the_title', 'max_title_length');
+          the_title(); ?></h1>
           <?php the_content(); ?>
         </div>
         <div class="tags col-sm-10">
@@ -46,6 +48,7 @@ get_header(); ?>
             <div class="col-sm-12">
               <div class="owl-related owl-carousel owl-theme">
                 <?php
+                add_filter( 'the_title', 'max_title_length');
                 $args = array(
                   'posts_per_page' => 6,
                 );
@@ -76,8 +79,7 @@ get_header(); ?>
                           Por <?php the_author()?>
                         </div>
                         <div class="options">
-                          <div class="comment op"><span class="comment-qtd">1</span><i class="far fa-comment-alt"></i></div>
-                          <div class="op"><i class="fas fa-share-alt"></i></div>
+                          <div class="comment op"><span class="comment-qtd"><?php echo get_comments_number(get_the_ID());?></span><i class="far fa-comment-alt"></i></div>
                         </div>
                       </div>
                       <div class="description">
@@ -98,6 +100,7 @@ get_header(); ?>
         </div>
         <div class="comments col-sm-10">
           <?php
+          wp_reset_postdata();
           if ( comments_open() || get_comments_number() ) :
             comments_template();
           endif;

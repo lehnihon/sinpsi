@@ -37,8 +37,7 @@
                 <h2 class="main-title"><?php the_title(); ?></h2>
               </a>
               <div class="options">
-                <div class="comment op"><span class="comment-qtd">1</span><i class="far fa-comment-alt"></i></div>
-                <div class="op"><i class="fas fa-share-alt"></i></div>
+                <div class="comment op"><span class="comment-qtd"><?php echo get_comments_number(get_the_ID());?></span><i class="far fa-comment-alt"></i></div>
               </div>
             </article>
             <?php
@@ -155,94 +154,73 @@
         <!-- TODOS -->
         <div class="col-12 todos tabs-custom tabs-custom-active">
           <div class="row">
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <a class="plus" href="#"><span>+</span></a>
+            <?php
+            $args = array(
+              'posts_per_page' => 4,
+              'post_type' => 'classified',
+              'orderby' => 'rand',
+            );
+            $query = new WP_Query( $args );
+            while ( $query->have_posts() ) : $query->the_post();
+              $preco = get_post_meta(get_the_ID(), 'preco', true);
+              $tipo = get_post_meta(get_the_ID(), 'tipo', true);
+            ?> 
+              <div class="col-md-3">
+                <a href="#">
+                  <article>
+                    <?php the_post_thumbnail('home-thumb', array(
+                      'class' => "e-cinza img-fluid",
+                    )); ?>
+                    <?php the_title('<h3>','</h3>') ?>
+                    <p class="type"><?php echo $tipo; ?></p>
+                    <p class="price">R$ <?php echo $preco; ?></p>
+                  </article>
+                </a>
+              </div>
+            <?php
+            endwhile;
+            ?>
+            <a class="plus" href="<?php echo home_url( '/classificados' ); ?>"><span>+</span></a>
           </div>
         </div>
 
         <!-- ZONA NORTE -->
         <div class="col-12 zona-norte tabs-custom">
           <div class="row">
-            <div class="col-md-3">
+            <?php
+            $args = array(
+              'posts_per_page' => 4,
+              'post_type' => 'classified',
+              'orderby' => 'rand',
+              'tax_query' => array(
+                array(
+                    'taxonomy' => 'localidade',
+                    'field' => 'slug',
+                    'terms' => 'zona-norte'
+                ),
+              )
+            );
+            $query = new WP_Query( $args );
+            while ( $query->have_posts() ) : $query->the_post();
+              $preco = get_post_meta(get_the_ID(), 'preco', true);
+              $tipo = get_post_meta(get_the_ID(), 'tipo', true);
+            ?> 
+           <div class="col-md-3">
               <a href="#">
                 <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
+                  <?php the_post_thumbnail('home-thumb', array(
+                    'class' => "e-cinza img-fluid",
+                  )); ?>
+                  <?php the_title('<h3>','</h3>') ?>
+                  <p class="type"><?php echo $tipo; ?></p>
+                  <p class="price">R$ <?php echo $preco; ?></p>
                 </article>
               </a>
             </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <a class="plus" href="#"><span>+</span></a>
+            <?php
+            endwhile;
+            ?>
+            <a class="plus" href="<?php echo home_url( '/classificados' ); ?>"><span>+</span></a>
           </div>
         </div>
 
