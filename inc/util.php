@@ -54,9 +54,17 @@ function the_excerpt_shortcode_single(){
 
 function custom_category_list($list){
   if(array_key_exists(0,$list)){
-    echo $list[0]->name;
+    if(!empty($list[0]->name)){
+      echo $list[0]->name;
+    }else{
+      echo $list[0];
+    }
   }
   if(array_key_exists(1,$list)){
-    echo ", ".$list[1]->name;
+    if(!empty($list[1]->name)){
+      echo $list[1]->name;
+    }else{
+      echo $list[1];
+    }
   }
 }

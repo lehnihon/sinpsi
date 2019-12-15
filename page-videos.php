@@ -8,8 +8,8 @@ get_header(); ?>
       $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
       $args = array(
         'posts_per_page' => 9,
-        'paged' => $paged,
-        'post_type' => 'classified'
+        'post_type' => 'video',
+        'paged' => $paged
       );
       $query = new WP_Query( $args );
       if ( $query->have_posts() ):
@@ -17,41 +17,23 @@ get_header(); ?>
       <div class="row">
         <?php
         while ( $query->have_posts() ) : $query->the_post();
+          $link = get_post_meta(get_the_ID(), 'link', true);
+          $linkpart = explode("?v=",$link);
+          $linkpart_var = explode("&",$linkpart[1]);
         ?>
           <div class="col-sm-4 mb-sm-5 container-article">
             <article>
-              <a class="img-link" style='background-image: url("<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>");' href="<?php the_permalink() ?>" title="">
-                <div class="post-date">
-                  <span>
-                    <strong><?php echo get_the_date( 'd' );?></strong><br><?php echo get_the_date( 'M' );?>
-                  </span>  
-                </div>
-                <div class="post-category">
-                  <span>
-                  <?php
-                  $cat_list = wp_get_object_terms( get_the_ID(), 'localidade', array( 'fields' => 'names' ) );
-                  custom_category_list($cat_list);
-                  ?>
-                  </span>
-                </div>
-              </a>
+              <div class=" embed-responsive embed-responsive-4by3 mb-3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?php echo (count($linkpart_var))? $linkpart_var[0]: ""; ?>" width="560" height="315" frameborder="0"></iframe>
+              </div>
               <div class="article-box">
                 <?php the_title('<h2>','</h2>'); ?>
                 <div class="autor">
                   <div class="autor-name">
                     Por <?php the_author()?>
                   </div>
-                  <div class="options">
-                    <div class="comment op"><span class="comment-qtd">1</span><i class="far fa-comment-alt"></i></div>
-                    <div class="op"><i class="fas fa-share-alt"></i></div>
-                  </div>
+  
                 </div>
-                <div class="description">
-                  <?php
-                  the_excerpt_shortcode();
-                  ?>
-                </div>  
-                <a class="mais" href="<?php the_permalink() ?>" title="mais">CONTINUAR A LER</a>
               </div>
             </article>
           </div>

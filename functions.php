@@ -36,6 +36,7 @@ function register_post_type_classified(){
       );
   $args = array(
       'labels' => $labels,
+      'show_in_rest' => true,
       'public' => true,
           'supports' => array('title','editor', 'thumbnail'),
           'menu_position' => 5
@@ -116,6 +117,90 @@ function wporg_save_postdata($post_id)
     }
 }
 add_action('save_post', 'wporg_save_postdata');
+
+
+
+
+function register_post_type_video(){
+  $singular = 'Video';
+  $plural = 'Videos';
+  $labels = array(
+      'name' => $plural,
+      'singular_name' => $singular,
+      'add_new_item' => 'Adicionar novo '.$singular,
+      );
+  $args = array(
+      'labels' => $labels,
+      'public' => true,
+          'supports' => array('title'),
+          'menu_position' => 5
+      );
+
+  register_post_type('video',$args);
+}
+add_action( 'init','register_post_type_video');
+
+function register_taxonomy_categoria(){
+  $labels = array(
+      'name'              => _x( 'Categoria', 'taxonomy general name' ),
+      'singular_name'     => _x( 'Categoria', 'taxonomy singular name' ),
+      'search_items'      => __( 'Procurar Categoria' ),
+      'all_items'         => __( 'Todas Categorias' ),
+      'parent_item'       => __( 'Categoria Pai' ),
+      'parent_item_colon' => __( 'Categoria Pai:' ),
+      'edit_item'         => __( 'Editar Categoria' ),
+      'update_item'       => __( 'Atualizar Categoria' ),
+      'add_new_item'      => __( 'Adicionar Categoria' ),
+      'new_item_name'     => __( 'Nome Nova Categoria' ),
+      'menu_name'         => __( 'Categoria' ),
+  );
+
+  $args = array(
+      'hierarchical'      => true,
+      'labels'            => $labels,
+      'show_ui'           => true,
+      'show_admin_column' => true,
+      'query_var'         => true,
+      'rewrite' => array( 'slug' => 'categoria' )
+  );
+register_taxonomy( 'categoria', 'video', $args );
+}
+add_action('init','register_taxonomy_categoria');
+
+function wporg_add_custom_boxb()
+{
+    add_meta_box(
+        'wporg_box_idb',           // Unique ID
+        'Extras',  // Box title
+        'wporg_custom_box_htmlb',  // Content callback, must be of type callable
+        'video'                   // Post type
+    );
+}
+add_action('add_meta_boxes', 'wporg_add_custom_boxb');
+
+function wporg_custom_box_htmlb($post)
+{
+	$link = get_post_meta($post->ID, 'link', true);
+    ?>
+	    <p>
+	    	<label>Url Vídeo: </label>
+		    <input style="width: 100%" type="text" name="link" value="<?php echo  esc_html($link) ?>">
+	    </p>
+    <?php
+}
+function wporg_save_postdatab($post_id)
+{
+	if (array_key_exists('link', $_POST)) {
+        update_post_meta(
+            $post_id,
+            'link',
+            sanitize_text_field($_POST['link'])
+        );
+    }
+}
+add_action('save_post', 'wporg_save_postdatab');
+
+
 
 function max_title_length( $title ) { 
   $max = 60;

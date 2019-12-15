@@ -10,7 +10,7 @@
             <h2>Sindicalize-se</h2>
             <h4>Junte-se a quem<br> luta por você!</h4>
           </div>
-          <a class="btn-sind" href="#">Saiba Mais</a>
+          <a class="btn-sind" href="<?php echo home_url( '/sindicalize' ); ?>">Saiba Mais</a>
         </div>
       </div>
       <div class="col-sm-5 px-1">
@@ -114,14 +114,28 @@
           <div class="row">
             <div class="col-12">
               <h2>Vídeos</h2>
+              <?php
+              $args = array(
+                'posts_per_page' => 1,
+                'post_type' => 'video',
+              );
+              $query = new WP_Query( $args );
+              if ( $query->have_posts() ) : $query->the_post();
+                $link = get_post_meta(get_the_ID(), 'link', true);
+                $linkpart = explode("?v=",$link);
+                $linkpart_var = explode("&",$linkpart[1]);
+              ?>
               <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/_FzaRaQRun4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/<?php echo (count($linkpart_var))? $linkpart_var[0]: ""; ?>" allowfullscreen></iframe>
               </div>
+              <?php
+              endif;
+              ?>
             </div>
           </div>
           <div class="row mt-xl-2 mt-lg-5">
             <div class="col-12">
-              <a class="btn-full-gray" href="#">Mais Vídeos</a>
+              <a class="btn-full-gray" href="<?php echo home_url( '/videos' ); ?>">Mais Vídeos</a>
             </div>
           </div>        
         </div>
@@ -166,7 +180,7 @@
               $tipo = get_post_meta(get_the_ID(), 'tipo', true);
             ?> 
               <div class="col-md-3">
-                <a href="#">
+                <a href="<?php the_permalink(); ?>">
                   <article>
                     <?php the_post_thumbnail('home-thumb', array(
                       'class' => "e-cinza img-fluid",
@@ -227,184 +241,160 @@
         <!-- ZONA SUL -->
         <div class="col-12 zona-sul tabs-custom">
           <div class="row">
-            <div class="col-md-3">
+          <?php
+            $args = array(
+              'posts_per_page' => 4,
+              'post_type' => 'classified',
+              'orderby' => 'rand',
+              'tax_query' => array(
+                array(
+                    'taxonomy' => 'localidade',
+                    'field' => 'slug',
+                    'terms' => 'zona-sul'
+                ),
+              )
+            );
+            $query = new WP_Query( $args );
+            while ( $query->have_posts() ) : $query->the_post();
+              $preco = get_post_meta(get_the_ID(), 'preco', true);
+              $tipo = get_post_meta(get_the_ID(), 'tipo', true);
+            ?> 
+           <div class="col-md-3">
               <a href="#">
                 <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
+                  <?php the_post_thumbnail('home-thumb', array(
+                    'class' => "e-cinza img-fluid",
+                  )); ?>
+                  <?php the_title('<h3>','</h3>') ?>
+                  <p class="type"><?php echo $tipo; ?></p>
+                  <p class="price">R$ <?php echo $preco; ?></p>
                 </article>
               </a>
             </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <a class="plus" href="#"><span>+</span></a>
+            <?php
+            endwhile;
+            ?>
+            <a class="plus" href="<?php echo home_url( '/classificados' ); ?>"><span>+</span></a>
           </div>
         </div>
 
         <!-- ZONA LESTE -->
         <div class="col-12 zona-leste tabs-custom">
           <div class="row">
-            <div class="col-md-3">
+          <?php
+            $args = array(
+              'posts_per_page' => 4,
+              'post_type' => 'classified',
+              'orderby' => 'rand',
+              'tax_query' => array(
+                array(
+                    'taxonomy' => 'localidade',
+                    'field' => 'slug',
+                    'terms' => 'zona-leste'
+                ),
+              )
+            );
+            $query = new WP_Query( $args );
+            while ( $query->have_posts() ) : $query->the_post();
+              $preco = get_post_meta(get_the_ID(), 'preco', true);
+              $tipo = get_post_meta(get_the_ID(), 'tipo', true);
+            ?> 
+           <div class="col-md-3">
               <a href="#">
                 <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
+                  <?php the_post_thumbnail('home-thumb', array(
+                    'class' => "e-cinza img-fluid",
+                  )); ?>
+                  <?php the_title('<h3>','</h3>') ?>
+                  <p class="type"><?php echo $tipo; ?></p>
+                  <p class="price">R$ <?php echo $preco; ?></p>
                 </article>
               </a>
             </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <a class="plus" href="#"><span>+</span></a>
+            <?php
+            endwhile;
+            ?>
+            <a class="plus" href="<?php echo home_url( '/classificados' ); ?>"><span>+</span></a>
           </div>
         </div>
 
         <!-- ZONA OESTE -->
         <div class="col-12 zona-oeste tabs-custom">
           <div class="row">
-            <div class="col-md-3">
+          <?php
+            $args = array(
+              'posts_per_page' => 4,
+              'post_type' => 'classified',
+              'orderby' => 'rand',
+              'tax_query' => array(
+                array(
+                    'taxonomy' => 'localidade',
+                    'field' => 'slug',
+                    'terms' => 'zona-oeste'
+                ),
+              )
+            );
+            $query = new WP_Query( $args );
+            while ( $query->have_posts() ) : $query->the_post();
+              $preco = get_post_meta(get_the_ID(), 'preco', true);
+              $tipo = get_post_meta(get_the_ID(), 'tipo', true);
+            ?> 
+           <div class="col-md-3">
               <a href="#">
                 <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
+                  <?php the_post_thumbnail('home-thumb', array(
+                    'class' => "e-cinza img-fluid",
+                  )); ?>
+                  <?php the_title('<h3>','</h3>') ?>
+                  <p class="type"><?php echo $tipo; ?></p>
+                  <p class="price">R$ <?php echo $preco; ?></p>
                 </article>
               </a>
             </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                  <p class="price">R$ 500</p>
-                </article>
-              </a>
-            </div>
-            <a class="plus" href="#"><span>+</span></a>
+            <?php
+            endwhile;
+            ?>
+            <a class="plus" href="<?php echo home_url( '/classificados' ); ?>"><span>+</span></a>
           </div>
         </div>
 
         <!-- VAGAS -->
         <div class="col-12 vagas tabs-custom">
           <div class="row">
-            <div class="col-md-3">
+          <?php
+            $args = array(
+              'posts_per_page' => 4,
+              'post_type' => 'classified',
+              'orderby' => 'rand',
+              'tax_query' => array(
+                array(
+                    'taxonomy' => 'localidade',
+                    'field' => 'slug',
+                    'terms' => 'vagas'
+                ),
+              )
+            );
+            $query = new WP_Query( $args );
+            while ( $query->have_posts() ) : $query->the_post();
+              $preco = get_post_meta(get_the_ID(), 'preco', true);
+              $tipo = get_post_meta(get_the_ID(), 'tipo', true);
+            ?> 
+           <div class="col-md-3">
               <a href="#">
                 <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
+                  <?php the_post_thumbnail('home-thumb', array(
+                    'class' => "e-cinza img-fluid",
+                  )); ?>
+                  <?php the_title('<h3>','</h3>') ?>
+                  <p class="type"><?php echo $tipo; ?></p>
+                  <p class="price">R$ <?php echo $preco; ?></p>
                 </article>
               </a>
             </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                </article>
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <article>
-                  <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/noticias.jpg"; ?>"/>
-                  <h3>Salas Fradique</h3>
-                  <p class="type">Locação</p>
-                </article>
-              </a>
-            </div>
-            <a class="plus" href="#"><span>+</span></a>
+            <?php
+            endwhile;
+            ?>
+            <a class="plus" href="<?php echo home_url( '/classificados' ); ?>"><span>+</span></a>
           </div>
         </div>
 

@@ -14,7 +14,7 @@
 <body>
   <div id="header">
     <div class="text-center">
-      <a href="#">
+      <a href="<?php echo home_url( '' ); ?>">
         <img class="img-fluid" src="<?php echo dirname( get_bloginfo('stylesheet_url'))."/assets/img/logo.jpg"; ?>"/>
       </a>
     </div>
@@ -34,23 +34,23 @@
               </li>
             </ul>
             <ul class="navbar-nav main-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+              <li class="nav-item <?php echo (get_query_var('pagename') == '')? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo home_url( '' ); ?>">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Quem Somos</a>
+              <li class="nav-item <?php echo (get_query_var('pagename') == 'quem-somos')? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo home_url( '/quem-somos' ); ?>">Quem Somos</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Diretoria</a>
+              <li class="nav-item <?php echo (get_query_var('pagename') == 'diretoria')? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo home_url( '/diretoria' ); ?>">Diretoria</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Sindicalize</a>
+              <li class="nav-item <?php echo (get_query_var('pagename') == 'sindicalize')? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo home_url( '/sindicalize' ); ?>">Sindicalize</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Fale Conosco</a>
+              <li class="nav-item <?php echo (get_query_var('pagename') == 'fale-conosco')? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo home_url( '/fale-conosco' ); ?>">Fale Conosco</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Acordo e Convenções</a>
+              <li class="nav-item <?php echo (get_query_var('pagename') == 'acordos-e-convencoes')? 'active' : ''; ?>">
+                <a class="nav-link" href="<?php echo home_url( '/acordos-e-convencoes' ); ?>">Acordo e Convenções</a>
               </li>
             </ul>
             <div class="navbar-nav search ml-auto">
